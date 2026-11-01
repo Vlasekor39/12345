@@ -158,7 +158,7 @@ public class YandexHudService extends NotificationListenerService {
                 Notification notif = new Notification.Builder(this, chId)
                         .setContentTitle("Vesta HUD Bridge v3.0 активен")
                         .setContentText("Автопередача Яндекс.Навигатора (Фон + Полный экран)")
-                        .setSmallIcon(android.R.drawable.stat_sys_data_usb)
+                        .setSmallIcon(android.R.drawable.ic_dialog_info)
                         .setOngoing(true)
                         .build();
                 startForeground(101, notif);
