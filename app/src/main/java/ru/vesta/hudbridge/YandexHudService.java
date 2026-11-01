@@ -198,12 +198,12 @@ public class YandexHudService extends NotificationListenerService {
         try {
             ComponentName cnAcc = new ComponentName(this, YandexAccessibilityService.class);
             String flatAcc = cnAcc.flattenToString();
-            String curAcc = Settings.Secure.getString(getContentResolver(), Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
+            String curAcc = Settings.Secure.getString(getContentResolver(), "enabled_accessibility_services");
             if (curAcc == null || !curAcc.contains(flatAcc)) {
                 String nextAcc = (curAcc == null || curAcc.isEmpty()) ? flatAcc : curAcc + ":" + flatAcc;
-                Settings.Secure.putString(getContentResolver(), Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES, nextAcc);
+                Settings.Secure.putString(getContentResolver(), "enabled_accessibility_services", nextAcc);
             }
-            Settings.Secure.putInt(getContentResolver(), Settings.Secure.ACCESSIBILITY_ENABLED, 1);
+            Settings.Secure.putInt(getContentResolver(), "accessibility_enabled", 1);
         } catch (Exception ignored) {}
 
         if (!isListenerConnected && Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -287,6 +287,7 @@ public class YandexHudService extends NotificationListenerService {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void onNotificationPosted(StatusBarNotification sbn) {
         isListenerConnected = true;
         if (sbn == null) return;
